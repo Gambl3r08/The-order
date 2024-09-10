@@ -54,3 +54,25 @@ async def get_orders():
         return JSONResponse(content=json_response)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/orders/terminated", response_model=List[OrderGetResponse])
+async def get_terminated_orders():
+    try:
+        order_controller = OrderController(SessionLocal())
+        data = order_controller.get_terminated_orders()
+        if data is None:
+            response = {
+                "status": StatusCodes.STATUS_CODE_NOT_FOUND,
+                "message": "Orders not found",
+                "data": data
+            }
+        response = {
+            "status": StatusCodes.STATUS_CODE_OK,
+            "message": "Orders found successfully",
+            "data": data
+        }
+        json_response = jsonable_encoder(response)
+        return JSONResponse(content=json_response)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))

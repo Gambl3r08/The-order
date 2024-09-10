@@ -32,13 +32,24 @@ class OrderController:
         return OrderResponse.model_validate(db_order)
 
     def get_orders(self):
-        orders = self.db.query(Order).filter(Order.active == 1).all()
+        orders = self.db.query(Order).filter(
+            Order.active == 1,
+            Order.order_status == 0
+            ).all()
         for order in orders:
             sub_orders = self.db.query(
                 SubOrder).filter(SubOrder.order_id == order.order_id).all()
             order.sub_orders = [
                 SubOrderResponse.model_validate(
                     sub_order) for sub_order in sub_orders]
+
+        return [OrderGetResponse.model_validate(order) for order in orders]
+
+    def get_terminated_orders(self):
+        orders = self.db.query(Order).filter(
+            Order.active == 1,
+            Order.order_status == 1
+            ).all()
 
         return [OrderGetResponse.model_validate(order) for order in orders]
 
