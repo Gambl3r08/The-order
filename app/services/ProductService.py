@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException
-from app.schemas.ProductSchemma import Product, ProductCreate
+from app.schemas.ProductSchema import Product, ProductCreate
 from app.controllers.ProductController import ProductController
 from app.core.db import SessionLocal
 from app.utils import StatusCodes
@@ -21,6 +21,7 @@ async def create_product(product: ProductCreate):
                 "message": "Product not created",
                 "data": data
             }
+
         response = {
             "status": StatusCodes.STATUS_CODE_CREATED,
             "message": "Product created successfully",
