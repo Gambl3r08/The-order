@@ -17,6 +17,7 @@ class SubOrder(Base):
         UUID(as_uuid=True), default=uuid.uuid4)
     product_id = Column(
         UUID(as_uuid=True), default=uuid.uuid4)
+    quantity = Column(Integer, nullable=False)
     active = Column(Integer, nullable=False, server_default=str(1))
     created_at = Column(DateTime, default=current_timestamp())
     updated_at = Column(DateTime, default=current_timestamp(),

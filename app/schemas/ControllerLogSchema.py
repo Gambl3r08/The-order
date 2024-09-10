@@ -4,7 +4,6 @@ from datetime import datetime
 
 
 class LogBase(BaseModel):
-    log_name: str = Field(..., max_length=255)
     controller_name: str = Field(..., max_length=255)
     success: int
     message: str = Field(..., max_length=255)
@@ -27,6 +26,10 @@ class Log(LogBase):
 
 
 class LogResponse(BaseModel):
+    controller_log_id: UUID
+    controller_name: str = Field(..., max_length=255)
+    success: int
+    message: str = Field(..., max_length=255)
     active: int
     created_at: datetime
     updated_at: datetime
