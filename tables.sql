@@ -26,7 +26,7 @@ CREATE TABLE sub_orders (
     order_id UUID DEFAULT gen_random_uuid(),
     product_id UUID DEFAULT gen_random_uuid(),
     quantity INTEGER NOT NULL,
-    extra VARCHAR(255) NOT NULL,
+    observation VARCHAR(255) NOT NULL,
     active INTEGER NOT NULL DEFAULT 1,
     created_at TIMESTAMP WITHOUT TIME ZONE DEFAULT current_timestamp,
     updated_at TIMESTAMP WITHOUT TIME ZONE DEFAULT current_timestamp

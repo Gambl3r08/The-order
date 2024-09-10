@@ -22,7 +22,7 @@ class OrderController:
                 order_id=db_order.order_id,
                 product_id=item.product_id,
                 quantity=item.quantity,
-                extra=item.extra
+                observation=item.observation
             )
             self.db.add(sub_order)
 

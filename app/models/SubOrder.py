@@ -17,7 +17,7 @@ class SubOrder(Base):
         UUID(as_uuid=True), default=uuid.uuid4)
     product_id = Column(
         UUID(as_uuid=True), default=uuid.uuid4)
-    extra = Column(String(255), nullable=True)
+    observation = Column(String(255), nullable=True)
     quantity = Column(Integer, nullable=False)
     active = Column(Integer, nullable=False, server_default=str(1))
     created_at = Column(DateTime, default=current_timestamp())
@@ -29,7 +29,7 @@ class SubOrder(Base):
             f"SubOrder(sub_order_id={self.sub_order_id!r}, "
             f"order_id={self.order_id!r}, "
             f"product_id={self.product_id!r}, "
-            f"extra={self.extra!r}, "
+            f"observation={self.observation!r}, "
             f"quantity={self.quantity!r}, "
             f"active={self.active!r}, "
             f"created_at={self.created_at!r}, "
@@ -41,7 +41,7 @@ class SubOrder(Base):
             f"SubOrder ID: {self.sub_order_id}, "
             f"Order ID: {self.order_id}, "
             f"Product ID: {self.product_id}, "
-            f"Extras: {self.extra}, "
+            f"Extras: {self.observation}, "
             f"Quantity: {self.quantity}, "
             f"Active: {self.active}, "
             f"Created At: {self.created_at}, "
