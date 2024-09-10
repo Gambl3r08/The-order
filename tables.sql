@@ -5,7 +5,6 @@ CREATE TABLE products (
     product_name VARCHAR(255) NOT NULL,
     price NUMERIC(10, 2) NOT NULL,
     description VARCHAR(255) NOT NULL,
-    extras VARCHAR(255) NOT NULL,
     active INTEGER NOT NULL DEFAULT 1,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -27,7 +26,24 @@ CREATE TABLE sub_orders (
     order_id UUID DEFAULT gen_random_uuid(),
     product_id UUID DEFAULT gen_random_uuid(),
     quantity INTEGER NOT NULL,
+    extras VARCHAR(255) NOT NULL,
     active INTEGER NOT NULL DEFAULT 1,
     created_at TIMESTAMP WITHOUT TIME ZONE DEFAULT current_timestamp,
     updated_at TIMESTAMP WITHOUT TIME ZONE DEFAULT current_timestamp
+);
+
+CREATE TABLE order_type (
+    order_type_id SERIAL PRIMARY KEY,
+    type_name VARCHAR(100) NOT NULL,
+    active INTEGER NOT NULL DEFAULT 1,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE orders_status (
+    order_status_id SERIAL PRIMARY KEY,
+    status_name VARCHAR(100) NOT NULL,
+    active INTEGER NOT NULL DEFAULT 1,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

@@ -1,6 +1,6 @@
 from app.core.db import Base
 from sqlalchemy.sql.functions import current_timestamp
-from sqlalchemy import Column, DateTime, Integer, UUID
+from sqlalchemy import Column, DateTime, Integer, UUID, String
 import uuid
 
 CREATE = 0
@@ -17,6 +17,7 @@ class SubOrder(Base):
         UUID(as_uuid=True), default=uuid.uuid4)
     product_id = Column(
         UUID(as_uuid=True), default=uuid.uuid4)
+    extras = Column(String(255), nullable=True)
     quantity = Column(Integer, nullable=False)
     active = Column(Integer, nullable=False, server_default=str(1))
     created_at = Column(DateTime, default=current_timestamp())
