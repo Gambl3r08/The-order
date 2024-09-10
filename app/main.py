@@ -5,6 +5,7 @@ from app.services.OrderService import router as order_router
 from app.services.BillService import router as bill_router
 from app.services.OrderTypeService import router as order_type_router
 from app.services.OrderStatusService import router as order_status_router
+from app.services.RestaurantService import router as restaurant_router
 from app.core.db import engine, Base
 from dotenv import load_dotenv
 from fastapi.middleware.cors import CORSMiddleware
@@ -39,4 +40,7 @@ app.include_router(
 )
 app.include_router(
     order_status_router, tags=["Order Statuses"], prefix="/api/v1"
+)
+app.include_router(
+    restaurant_router, tags=["Restaurants"], prefix="/api/v1"
 )
