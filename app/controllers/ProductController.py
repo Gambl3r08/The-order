@@ -1,7 +1,6 @@
 from sqlalchemy.orm import Session
 from app.models.Product import Product
-from app.schemas.ProductSchema import ProductResponse
-from app.schemas.ProductSchema import ProductCreate
+from app.schemas.ProductSchema import ProductResponse, ProductCreate
 import uuid
 
 
