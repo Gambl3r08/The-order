@@ -3,6 +3,7 @@ from app.models.SubOrder import SubOrder
 from app.models.Product import Product
 from decimal import Decimal
 import uuid
+from app.models.Order import TERMINATED
 
 IVA = 0.19
 
@@ -94,3 +95,11 @@ class BillController:
         data["IVA"] = IVA
 
         return data
+
+    def print_bill(self, order_id: uuid.UUID):
+        bill = self.get_bill(order_id)
+        order = self.query.get(order_id)
+        if order:
+            order.order_status = TERMINATED
+            self.session.commit()
+        return bill

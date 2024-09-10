@@ -29,3 +29,25 @@ async def get_bill_by_order_id(order_id: uuid.UUID):
         return JSONResponse(content=json_response)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.post("/bills/{order_id}")
+async def print_bill(order_id: uuid.UUID):
+    try:
+        bill_controller = BillController(SessionLocal())
+        data = bill_controller.print_bill(order_id)
+        if data is None:
+            response = {
+                "status": StatusCodes.STATUS_CODE_NOT_FOUND,
+                "message": "Bill not found",
+                "data": data
+            }
+        response = {
+            "status": StatusCodes.STATUS_CODE_OK,
+            "message": "Bill printed successfully",
+            "data": data
+        }
+        json_response = jsonable_encoder(response)
+        return JSONResponse(content=json_response)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))

@@ -1,7 +1,7 @@
 from pydantic import BaseModel, Field, UUID4
 from uuid import UUID
 from datetime import datetime
-from typing import List, Optional
+from typing import List
 from app.schemas.SubOrderSchema import SubOrderBase, SubOrderResponse
 
 

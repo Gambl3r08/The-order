@@ -4,7 +4,7 @@ from sqlalchemy import Column, DateTime, Integer, String, UUID
 import uuid
 
 CREATE = 0
-IN_PREPARATION = 1
+TERMINATED = 1
 DELIVERED = 2
 
 
