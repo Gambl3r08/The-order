@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException
-from app.schemas.OrderSchema import OrderResponse, OrderCreate
+from app.schemas.OrderSchema import OrderResponse, OrderCreate, OrderGetResponse
 from app.controllers.OrderController import OrderController
 from app.core.db import SessionLocal
 from app.utils import StatusCodes
@@ -34,7 +34,7 @@ async def create_order(order: OrderCreate):
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@router.get("/orders", response_model=List[OrderResponse])
+@router.get("/orders", response_model=List[OrderGetResponse])
 async def get_orders():
     try:
         order_controller = OrderController(SessionLocal())

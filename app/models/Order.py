@@ -20,3 +20,19 @@ class Order(Base):
     created_at = Column(DateTime, default=current_timestamp())
     updated_at = Column(DateTime, default=current_timestamp(),
                         onupdate=current_timestamp())
+
+    def __repr__(self):
+        return (f"Order(order_id={self.order_id!r}, "
+                f"customer_name={self.customer_name!r}, "
+                f"order_status={self.order_status!r}, "
+                f"shipping={self.shipping!r}, "
+                f"created_at={self.created_at!r}, "
+                f"updated_at={self.updated_at!r})")
+
+    def __str__(self):
+        return (f"Order ID: {self.order_id}, "
+                f"Customer Name: {self.customer_name}, "
+                f"Order Status: {self.order_status}, "
+                f"Shipping: {self.shipping}, "
+                f"Created At: {self.created_at}, "
+                f"Updated At: {self.updated_at}")

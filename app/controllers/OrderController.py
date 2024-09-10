@@ -3,6 +3,7 @@ from app.models.Order import Order
 from app.models.SubOrder import SubOrder
 from app.schemas.OrderSchema import (
     OrderResponse, OrderCreate, OrderUpdate, OrderGetResponse)
+from app.schemas.SubOrderSchema import SubOrderResponse
 import uuid
 
 
@@ -11,7 +12,6 @@ class OrderController:
         self.db = db
 
     def create_order(self, order: OrderCreate):
-        print(order)
         order_data = order.dict(exclude={'products'})
         db_order = Order(**order_data)
         self.db.add(db_order)
@@ -21,7 +21,8 @@ class OrderController:
             sub_order = SubOrder(
                 order_id=db_order.order_id,
                 product_id=item.product_id,
-                quantity=item.quantity
+                quantity=item.quantity,
+                extra=item.extra
             )
             self.db.add(sub_order)
 
@@ -31,12 +32,15 @@ class OrderController:
         return OrderResponse.model_validate(db_order)
 
     def get_orders(self):
+        # import pdb
+        # pdb.set_trace()
         orders = self.db.query(Order).filter(Order.active == 1).all()
-
         for order in orders:
             sub_orders = self.db.query(
                 SubOrder).filter(SubOrder.order_id == order.order_id).all()
-            order.sub_orders = sub_orders
+            order.sub_orders = [
+                SubOrderResponse.model_validate(
+                    sub_order) for sub_order in sub_orders]
 
         return [OrderGetResponse.model_validate(order) for order in orders]
 
