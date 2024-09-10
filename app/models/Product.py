@@ -1,4 +1,4 @@
-from core.db import Base
+from app.core.db import Base
 from sqlalchemy.sql.functions import current_timestamp
 from sqlalchemy import Column, DateTime, Integer, String, UUID, Numeric
 import uuid

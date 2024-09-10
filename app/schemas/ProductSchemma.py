@@ -11,7 +11,6 @@ class ProductBase(BaseModel):
     description: str = Field(..., max_length=255)
     stock: Optional[int] = None
     quantity: int
-    active: int = Field(..., ge=0)  # Asegura que el valor sea 0 o mayor
 
 
 class ProductCreate(ProductBase):
@@ -24,8 +23,20 @@ class ProductUpdate(ProductBase):
 
 class Product(ProductBase):
     product_id: UUID
+    product_name: str
+
+    class Config:
+        from_attributes = True
+
+
+class ProductResponse(BaseModel):
+    product_id: UUID
+    product_name: str
+    price: Decimal
+    description: str
+    quantity: int
     created_at: datetime
     updated_at: datetime
 
     class Config:
-        orm_mode = True
+        from_attributes = True
