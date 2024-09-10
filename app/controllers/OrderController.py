@@ -32,8 +32,6 @@ class OrderController:
         return OrderResponse.model_validate(db_order)
 
     def get_orders(self):
-        # import pdb
-        # pdb.set_trace()
         orders = self.db.query(Order).filter(Order.active == 1).all()
         for order in orders:
             sub_orders = self.db.query(
