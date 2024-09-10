@@ -4,7 +4,6 @@ from typing import Optional
 
 
 class SubOrderBase(BaseModel):
-    order_id: UUID
     product_id: UUID
     quantity: int
     extra: Optional[str]

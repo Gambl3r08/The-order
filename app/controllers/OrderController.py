@@ -11,12 +11,12 @@ class OrderController:
         self.db = db
 
     def create_order(self, order: OrderCreate):
+        print(order)
         order_data = order.dict(exclude={'products'})
         db_order = Order(**order_data)
         self.db.add(db_order)
         self.db.commit()
         self.db.refresh(db_order)
-
         for item in order.products:
             sub_order = SubOrder(
                 order_id=db_order.order_id,
