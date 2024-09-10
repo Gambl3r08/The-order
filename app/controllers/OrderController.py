@@ -1,8 +1,7 @@
 from sqlalchemy.orm import Session
 from app.models.Order import Order
 from app.models.SubOrder import SubOrder
-from app.schemas.OrderSchema import OrderResponse, OrderCreate, OrderUpdate
-from app.schemas.SubOrderSchema import SubOrderCreate
+from app.schemas.OrderSchema import OrderResponse, OrderCreate, OrderUpdate, OrderGetResponse
 import uuid
 
 
@@ -29,3 +28,14 @@ class OrderController:
         self.db.refresh(db_order)
 
         return OrderResponse.model_validate(db_order)
+
+    def get_orders(self):
+        orders = self.db.query(Order).filter(Order.active == 1).all()
+
+        for order in orders:
+            sub_orders = self.db.query(
+                SubOrder).filter(SubOrder.order_id == order.order_id).all()
+            order.sub_orders = sub_orders
+            print(order.sub_orders)
+
+        return [OrderGetResponse.model_validate(order) for order in orders]
