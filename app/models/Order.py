@@ -14,8 +14,7 @@ class Order(Base):
     order_id = Column(
         UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     customer_name = Column(String(255), nullable=False)
-    order_status = Column(Integer, nullable=False, default=0)
-    observations = Column(String(255), nullable=True)
+    order_status = Column(Integer, nullable=False, server_default=str(0))
     shipping = Column(Integer, nullable=False)
     active = Column(Integer, nullable=False, server_default=str(1))
     created_at = Column(DateTime, default=current_timestamp())

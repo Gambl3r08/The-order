@@ -7,8 +7,6 @@ from app.schemas.SubOrderSchema import SubOrderBase, SubOrderResponse
 
 class OrderBase(BaseModel):
     customer_name: str = Field(..., max_length=255)
-    order_status: int
-    observations: str = Field(..., max_length=255)
     shipping: int
 
 
@@ -23,8 +21,6 @@ class OrderUpdate(OrderBase):
 class OrderResponse(BaseModel):
     order_id: UUID
     customer_name: str
-    order_status: int
-    observations: str
     shipping: int
     active: int
     created_at: datetime
@@ -37,8 +33,6 @@ class OrderResponse(BaseModel):
 class OrderGetResponse(BaseModel):
     order_id: UUID4
     customer_name: str
-    order_status: int
-    observations: Optional[str]
     shipping: int
     created_at: datetime
     updated_at: datetime

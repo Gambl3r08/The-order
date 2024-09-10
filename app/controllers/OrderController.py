@@ -37,7 +37,6 @@ class OrderController:
             sub_orders = self.db.query(
                 SubOrder).filter(SubOrder.order_id == order.order_id).all()
             order.sub_orders = sub_orders
-            print(order.sub_orders)
 
         return [OrderGetResponse.model_validate(order) for order in orders]
 
