@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException
-from app.schemas.ProductSchemma import Product, ProductCreate, ProductResponse
+from app.schemas.ProductSchemma import Product, ProductCreate
 from app.controllers.ProductController import ProductController
 from app.core.db import SessionLocal
 from app.utils import StatusCodes
