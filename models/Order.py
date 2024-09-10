@@ -1,0 +1,13 @@
+from core.db import Base
+from sqlalchemy.sql.functions import current_timestamp
+from sqlalchemy import Column, DateTime, Integer, String, UUID
+
+
+class Order(Base):
+    __tablename__ = "orders"
+
+    id = Column(Integer, primary_key=True, index=True)
+    active = Column(Integer, nullable=False, server_default=str(1))
+    created_at = Column(DateTime, default=current_timestamp())
+    updated_at = Column(DateTime, default=current_timestamp(),
+                        onupdate=current_timestamp())
