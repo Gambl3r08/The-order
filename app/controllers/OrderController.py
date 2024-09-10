@@ -1,7 +1,8 @@
 from sqlalchemy.orm import Session
 from app.models.Order import Order
 from app.models.SubOrder import SubOrder
-from app.schemas.OrderSchema import OrderResponse, OrderCreate, OrderUpdate, OrderGetResponse
+from app.schemas.OrderSchema import (
+    OrderResponse, OrderCreate, OrderUpdate, OrderGetResponse)
 import uuid
 
 
@@ -39,3 +40,13 @@ class OrderController:
             print(order.sub_orders)
 
         return [OrderGetResponse.model_validate(order) for order in orders]
+
+    def update_order_status(self, order_id: uuid.UUID, order: OrderUpdate):
+        db_order = self.db.query(
+            Order).filter(Order.order_id == order_id).first()
+        if not db_order:
+            return None
+        db_order.order_status = order.order_status
+        self.db.commit()
+        self.db.refresh(db_order)
+        return OrderResponse.model_validate(db_order)
