@@ -9,8 +9,7 @@ class ProductBase(BaseModel):
     product_name: str = Field(..., max_length=255)
     price: Decimal
     description: str = Field(..., max_length=255)
-    stock: Optional[int] = None
-    quantity: int
+    extras: Optional[str]
 
 
 class ProductCreate(ProductBase):
@@ -34,7 +33,7 @@ class ProductResponse(BaseModel):
     product_name: str
     price: Decimal
     description: str
-    quantity: int
+    extras: Optional[str]
     created_at: datetime
     updated_at: datetime
 

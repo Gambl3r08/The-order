@@ -21,7 +21,9 @@ class ProductController:
 
     def get_product_by_id(self, product_id: uuid.UUID):
         product = self.db.query(
-            Product).filter(Product.product_id == product_id).first()
+            Product).filter(
+                Product.product_id == product_id).filter(
+                    Product.active == 1).first()
         return product
 
     def update_product(self, product_id: uuid.UUID, product: ProductCreate):

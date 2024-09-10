@@ -11,8 +11,7 @@ class Product(Base):
     product_name = Column(String(255), nullable=False)
     price = Column(Numeric(10, 2), nullable=False)
     description = Column(String(255), nullable=False)
-    stock = Column(Integer, nullable=True)
-    quantity = Column(Integer, nullable=False)
+    extras = Column(String(255), nullable=True)
     active = Column(Integer, nullable=False, server_default=str(1))
     created_at = Column(DateTime, default=current_timestamp())
     updated_at = Column(DateTime, default=current_timestamp(),
